@@ -1,16 +1,15 @@
-using NUnit.Framework.Interfaces;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class ChangeScene : MonoBehaviour
 {
-    public int Scene_Index;
+    public int sceneIndex; 
 
-    public void LoadScene()
+    public void LoadSceneByIndex()
     {
-        if (Scene_Index >= 0 && Scene_Index < SceneManager.sceneCountInBuildSettings)
-        {
-            SceneManager.LoadScene(Scene_Index);
-        }
+        if (sceneIndex >= 0 && sceneIndex < SceneManager.sceneCountInBuildSettings)
+            SceneManager.LoadScene(sceneIndex);
+        else
+            Debug.LogError("Неверный номер сцены!");
     }
 }

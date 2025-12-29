@@ -2,23 +2,13 @@ using UnityEngine;
 
 public class FollowCamer : MonoBehaviour
 {
-    public Transform playerTransform; 
-    public float horizontalOffset = 0f; 
-    public float verticalOffset = 0f;   
-    public float smoothSpeed = 0.125f;  
-
-    void Update()
+    public Transform target;
+    public float smoothSpeed = 0.125f;
+    public Vector3 offset;
+    void LateUpdate()
     {
-        if (playerTransform != null)
-        {
-            Vector3 desiredPosition = new Vector3(
-                playerTransform.position.x + horizontalOffset,
-                playerTransform.position.y + verticalOffset,
-                transform.position.z); 
-
-            transform.position = Vector3.SmoothDamp(transform.position, desiredPosition, ref velocity, smoothSpeed);
-        }
+        Vector3 desiredPosition = target.position + offset;
+        Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
+        transform.position = smoothedPosition;
     }
-
-    private Vector3 velocity = Vector3.zero;
 }
